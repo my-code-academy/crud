@@ -42,3 +42,16 @@ describe('user delete', () => {
     expect(await model.users.count()).toEqual(1);
   });
 });
+
+describe('user update', () => {
+  beforeEach(() => {
+    model.users.truncate();
+  });
+  it('should delete the entry in the database with the id given', async () => {
+    await model.users.generate(1, 'qwe', 'rty', 'qwe.rty@gmail.com');
+    await model.users.generate(2, 'asd', 'fgh', 'asd.fgh@gmail.com');
+    await model.users.updateFirstName('asd', 'bnm');
+    const newFirstName = await model.users.getUserById(2);
+    expect(newFirstName[0].firstName).toEqual('bnm');
+  });
+});

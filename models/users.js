@@ -21,5 +21,14 @@ module.exports = (sequelize, DataTypes) => {
       },
     });
   };
+  users.updateFirstName = (oldFirstName, newFirstName) => {
+    return users.update({
+      firstName: newFirstName,
+    }, {
+      where: {
+        firstName: oldFirstName,
+      },
+    });
+  };
   return users;
 };
